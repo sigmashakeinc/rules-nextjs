@@ -1,0 +1,20 @@
+# nextjs_write_safety.rules
+# Technology: nextjs | Capability: write
+
+rule nextjs-block-unsafe-patterns {
+  enabled true
+  priority 90
+  severity error
+  DENY write
+  IF path GLOB "**/*" AND content CONTAINS "UNSAFE_nextjs_PATTERN"
+  MESSAGE "Blocked an unsafe pattern in nextjs. Use the recommended best practices for 2025/2026."
+}
+
+rule nextjs-force-updated-api {
+  enabled true
+  priority 80
+  severity warning
+  ASK write
+  IF path GLOB "**/*" AND content CONTAINS "OLD_nextjs_API"
+  MESSAGE "You are using an outdated API for nextjs. Please upgrade to the newer API."
+}
